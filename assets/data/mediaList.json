@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "title": "Your Next Watch",
     "data": [
       {
@@ -35,6 +36,7 @@
     ]
   },
   {
+    "id": "2",
     "title": "Bingeworthy TV Shows",
     "data": [
       {
@@ -65,6 +67,7 @@
     ]
   },
   {
+    "id": "3",
     "title": "Today's Picks for You",
     "data": [
       {
