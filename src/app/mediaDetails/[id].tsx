@@ -11,11 +11,10 @@ import SeasonSelector from '@/components/MediaDetails/SeasonSelector'
 export default function MediaDetails() {
   const {id} = useLocalSearchParams()
   const [selectedSeason, setSelectedSeason] = useState<string>('Season 1')
-  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
   const videoViewRef = useRef<VideoView | null>(null);
 
   const mediaDetails = mediaDetailsList.find((media) => media.id === id)
-  const { thumbnail } = mediaDetails
+  const { thumbnail, seasons, type } = mediaDetails
   const videoSource = mediaDetails?.type === 'MOVIE' 
     ? mediaDetails.trailer
     : mediaDetails?.seasons?.[0].episodes?.[0].videoUrl
@@ -54,7 +53,13 @@ export default function MediaDetails() {
         videoViewRef={videoViewRef}
       />
       <MediaInfo media={mediaDetails} onPlayPressed={onPlayPressed}/>
-      <SeasonSelector selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason}/>
+
+      {(type === 'TV_SERIES' && !!seasons) && (
+        <SeasonSelector 
+          seasons={seasons}
+          selectedSeason={selectedSeason}
+        />
+      )}
     </SafeAreaView>
   )
 }
