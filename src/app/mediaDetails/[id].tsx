@@ -11,7 +11,7 @@ export default function MediaDetails() {
   const mediaDetails = mediaDetailsList.find((media) => media.id === id)
   const { thumbnail } = mediaDetails
   const videoSource = mediaDetails?.type === 'MOVIE' 
-    ? mediaDetails.videoUrl
+    ? mediaDetails.trailer
     : mediaDetails?.seasons?.[0].episodes?.[0].videoUrl
 
   // console.log(mediaDetails)
@@ -22,9 +22,11 @@ export default function MediaDetails() {
     return <Text style={{color: 'white'}}>Not found...</Text>
   }
 
-  const trailerPlayer = useVideoPlayer(mediaDetails.trailer, player => {
+  // console.log(videoSource)
+
+  const trailerPlayer = useVideoPlayer(videoSource, player => {
     player.currentTime = 10
-    // player.play();
+    player.play();
   });
 
   const mediaPlayer = useVideoPlayer(videoSource, player => {
