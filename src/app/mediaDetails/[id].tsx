@@ -58,6 +58,7 @@ export default function MediaDetails() {
         <SeasonSelector 
           seasons={seasons}
           selectedSeason={selectedSeason}
+          setSelectedSeason={setSelectedSeason}
         />
       )}
     </SafeAreaView>

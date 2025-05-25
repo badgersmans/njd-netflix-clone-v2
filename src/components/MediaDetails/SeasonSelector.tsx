@@ -6,11 +6,17 @@ import { Season } from "@/types/types";
 
 type SeasonSelectorProps = {
   seasons: Season[],
-  selectedSeason: string
+  selectedSeason: string,
+  setSelectedSeason: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function SeasonSelector({seasons, selectedSeason}: SeasonSelectorProps) {
+export default function SeasonSelector({seasons, selectedSeason, setSelectedSeason}: SeasonSelectorProps) {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
+
+  const onSeasonChanged = (newSeason: string) => {
+    setSelectedSeason(newSeason)
+    setIsMenuVisible(false)
+  }
 
   return (
     <Menu
@@ -20,13 +26,19 @@ export default function SeasonSelector({seasons, selectedSeason}: SeasonSelector
       anchorPosition='bottom'
       anchor={
         <TouchableOpacity style={styles.anchorContainer} onPress={() => setIsMenuVisible(true)}>
-          <Text style={styles.seasonText}>Season 1</Text>
+          <Text style={styles.seasonText}>{selectedSeason}</Text>
           <Entypo name="chevron-thin-down" size={15} color="#b7b7b7" />
         </TouchableOpacity>
       }
     >
     {seasons.map((season) => (
-      <Menu.Item key={season.seasonName} title={season.seasonName} titleStyle={{color: 'white'}}/>
+      <Menu.Item 
+        key={season.seasonName} 
+        title={season.seasonName} 
+        titleStyle={styles.titleStyle}
+        style={{height: 40}}
+        onPress={() => onSeasonChanged(season.seasonName)}
+      />
     ))}
     </Menu>
   )
@@ -53,4 +65,9 @@ const styles = StyleSheet.create({
     color: '#B7B7B7',
     fontWeight: '500'
   },
+  titleStyle: {
+    color: 'white',
+    fontWeight: '500',
+    fontSize: 14
+  }
 })
