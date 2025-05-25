@@ -1,10 +1,19 @@
 import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import mediaList from '@assets/data/mediaList.json'
+import MediaListItem from '@/components/MediaListItem';
+import { FlatList } from 'react-native';
 
-export default function App() {
+export default function Home() {
+  const media = mediaList;
+
   return (
     <Link href='/about' asChild>
-      <Text>tabs</Text>
+      <FlatList 
+        data={media}
+        renderItem={({item}) => (
+          <MediaListItem media={item}/>
+        )}
+      />
     </Link>
   );
 }

@@ -7,7 +7,7 @@ export default function TabsLayout() {
   return (
     <Tabs screenOptions={{headerShown: false}}>
       <Tabs.Screen 
-        name='myNetflix' 
+        name='index' 
         options={{
           title: 'Home',
           tabBarIcon: ({color}) => <Foundation name="home" size={24} color={color} />
@@ -21,7 +21,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen 
-        name='index' 
+        name='myNetflix' 
         options={{
           title: 'My Netflix',
           tabBarIcon: ({ color }) => <MaterialIcons name="portrait" size={24} color={color} />,
