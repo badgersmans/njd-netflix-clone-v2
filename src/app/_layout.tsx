@@ -1,7 +1,18 @@
 import { Stack } from 'expo-router'
+import {ThemeProvider, DarkTheme} from '@react-navigation/native'
 
 export default function RootAppLayout() {
+  const myTheme = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      primary: 'white'
+    }
+  }
+
   return (
-    <Stack />
+    <ThemeProvider value={myTheme}>
+      <Stack />
+    </ThemeProvider>
   )
 }
