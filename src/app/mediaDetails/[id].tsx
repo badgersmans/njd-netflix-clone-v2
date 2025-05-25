@@ -5,10 +5,13 @@ import mediaDetailsList from '@assets/data/mediaDetailedList.json'
 import MediaInfo from '@/components/MediaDetails/MediaInfo'
 import { useVideoPlayer, VideoView } from 'expo-video'
 import MediaHeader from '@/components/MediaDetails/MediaHeader'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import SeasonSelector from '@/components/MediaDetails/SeasonSelector'
 
 export default function MediaDetails() {
   const {id} = useLocalSearchParams()
+  const [selectedSeason, setSelectedSeason] = useState<string>('Season 1')
+  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
   const videoViewRef = useRef<VideoView | null>(null);
 
   const mediaDetails = mediaDetailsList.find((media) => media.id === id)
@@ -51,6 +54,7 @@ export default function MediaDetails() {
         videoViewRef={videoViewRef}
       />
       <MediaInfo media={mediaDetails} onPlayPressed={onPlayPressed}/>
+      <SeasonSelector selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason}/>
     </SafeAreaView>
   )
 }

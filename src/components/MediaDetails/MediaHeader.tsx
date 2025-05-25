@@ -41,6 +41,10 @@ export default function MediaHeader(props: MediaHeaderProps) {
         player={mediaPlayer}
         ref={videoViewRef}
         onFirstFrameRender={() => setIsMediaLoading(false)}
+        onFullscreenExit={() => {
+          mediaPlayer.pause()
+          trailerPlayer.play()
+        }}
         style={StyleSheet.absoluteFill}
       />
     </View>
