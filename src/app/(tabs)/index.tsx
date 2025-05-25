@@ -23,6 +23,7 @@ export default function HomeScreen() {
       </View>
       <FlatList
         data={media}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item: verticalItems }) => (
           <View>
             <Text style={styles.title}>{verticalItems.title}</Text>
@@ -30,6 +31,7 @@ export default function HomeScreen() {
             <FlatList
               data={verticalItems.data}
               horizontal
+              showsHorizontalScrollIndicator={false}
               renderItem={({ item: horizontalItems }) => (
                 <MediaListItem media={horizontalItems} />
               )}
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
   nameText: {
     color: 'white',
     fontSize: 25,
-    fontWeight: '600',
+    fontWeight: 'bold',
     marginBottom: 10,
   },
   categoryText: {

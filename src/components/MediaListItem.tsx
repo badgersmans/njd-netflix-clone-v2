@@ -1,5 +1,6 @@
 import { MediaListData } from '@/types/types'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { Link } from 'expo-router'
+import { StyleSheet, Image, TouchableOpacity } from 'react-native'
 
 type MediaListItemProps = {
   media: MediaListData
@@ -7,9 +8,11 @@ type MediaListItemProps = {
 
 export default function MediaListItem({media}: MediaListItemProps) {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{uri: media.image}}/>
-    </View>
+    <Link href={`/mediaDetails/${media.id}`} style={styles.container} asChild>
+      <TouchableOpacity>
+        <Image style={styles.image} source={{uri: media.image}}/>
+      </TouchableOpacity>
+    </Link>
   )
 }
 
@@ -23,5 +26,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10
   }
-  
 })
