@@ -33,6 +33,7 @@ export type Media = {
   title: string;
   description: string;
   releaseYear: number;
+  duration: number;
   ageRestriction: string;
   thumbnail: string;
   trailer: string;
