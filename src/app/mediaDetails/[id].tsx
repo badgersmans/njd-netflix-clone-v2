@@ -3,11 +3,14 @@ import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import mediaDetailsList from '@assets/data/mediaDetailedList.json'
 import MediaInfo from '@/components/MediaDetails/MediaInfo'
-import { useVideoPlayer } from 'expo-video'
+import { useVideoPlayer, VideoView } from 'expo-video'
 import MediaHeader from '@/components/MediaDetails/MediaHeader'
+import { useRef } from 'react'
 
 export default function MediaDetails() {
   const {id} = useLocalSearchParams()
+  const videoViewRef = useRef<VideoView | null>(null);
+
   const mediaDetails = mediaDetailsList.find((media) => media.id === id)
   const { thumbnail } = mediaDetails
   const videoSource = mediaDetails?.type === 'MOVIE' 
@@ -33,14 +36,21 @@ export default function MediaDetails() {
     player.showNowPlayingNotification = true;
   });
 
+  const onPlayPressed = () => {
+    trailerPlayer.pause()
+    videoViewRef.current?.enterFullscreen()
+    mediaPlayer.play()
+  }
+
   return (
     <SafeAreaView>
       <MediaHeader
         thumbnail={thumbnail}
         trailerPlayer={trailerPlayer}
         mediaPlayer={mediaPlayer}
+        videoViewRef={videoViewRef}
       />
-      <MediaInfo media={mediaDetails} />
+      <MediaInfo media={mediaDetails} onPlayPressed={onPlayPressed}/>
     </SafeAreaView>
   )
 }

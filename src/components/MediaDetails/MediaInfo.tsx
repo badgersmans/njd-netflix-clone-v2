@@ -3,10 +3,11 @@ import { Media } from '@/types/types'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 type MediaInfoProps = {
-  media: Media
+  media: Media,
+  onPlayPressed: () => void
 }
 
-export default function MediaInfo({media}: MediaInfoProps) {
+export default function MediaInfo({media, onPlayPressed}: MediaInfoProps) {
   return (
     <View>
       <Text style={styles.title}>{media.title}</Text>
@@ -17,7 +18,7 @@ export default function MediaInfo({media}: MediaInfoProps) {
         <Text style={styles.metaInfoText}>{media.type === 'MOVIE' ? `${media.duration} minutes`  : `${media.seasons.length} seasons`}</Text>
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => console.log('pressed...')}>
+      <TouchableOpacity style={styles.button} onPress={() => onPlayPressed()}>
         <FontAwesome5 name="play" size={24} color="black" />
         <Text style={styles.playPauseText}>Play</Text>
       </TouchableOpacity>

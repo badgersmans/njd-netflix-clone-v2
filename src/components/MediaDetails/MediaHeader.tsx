@@ -8,11 +8,14 @@ type MediaHeaderProps = {
   thumbnail: string,
   trailerPlayer: VideoPlayer,
   mediaPlayer: VideoPlayer,
+  videoViewRef: React.RefObject<VideoView | null>
 }
 
 export default function MediaHeader(props: MediaHeaderProps) {
-  const {thumbnail, trailerPlayer, mediaPlayer} = props
+  const {thumbnail, trailerPlayer, mediaPlayer, videoViewRef} = props
   const [isTrailerLoading, setIsTrailerLoading] = useState(true)
+  const [isMediaLoading, setIsMediaLoading] = useState(true)
+  
 
   return (
     <View style={styles.container}>
@@ -33,6 +36,12 @@ export default function MediaHeader(props: MediaHeaderProps) {
         player={trailerPlayer}
         style={StyleSheet.absoluteFill}
         onFirstFrameRender={() => setIsTrailerLoading(false)}
+      />
+      <VideoView
+        player={mediaPlayer}
+        ref={videoViewRef}
+        onFirstFrameRender={() => setIsMediaLoading(false)}
+        style={StyleSheet.absoluteFill}
       />
     </View>
   )
