@@ -3,39 +3,41 @@ import mediaList from '@assets/data/mediaList.json'
 import MediaListItem from '@/components/MediaListItem';
 import { FlatList, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-export default function Home() {
+export default function HomeScreen() {
   const media = mediaList;
 
   return (
-    <Link href='/about' asChild>
-      <SafeAreaView>
-        <View style={styles.searchContainer}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.searchContainer}>
+        <View style={styles.nameAndIcon}>
           <Text style={styles.nameText}>For Shawn</Text>
-          <ScrollView contentContainerStyle={styles.categoryContainer} horizontal>
-            <Text style={styles.categoryText}>TV Shows</Text>
-            <Text style={styles.categoryText}>Movies</Text>
-            <Text style={styles.categoryText}>Categories</Text>
-          </ScrollView>
+          <AntDesign name="search1" size={24} color="white" style={{marginLeft: 'auto', marginRight: 5}}/>
         </View>
-        <FlatList
-          data={media}
-          renderItem={({item: verticalItems}) => (
-            <View>
-              <Text style={styles.title}>{verticalItems.title}</Text>
+        <ScrollView contentContainerStyle={styles.categoryContainer} horizontal>
+          <Text style={styles.categoryText}>TV Shows</Text>
+          <Text style={styles.categoryText}>Movies</Text>
+          <Text style={styles.categoryText}>Categories</Text>
+        </ScrollView>
+      </View>
+      <FlatList
+        data={media}
+        renderItem={({ item: verticalItems }) => (
+          <View>
+            <Text style={styles.title}>{verticalItems.title}</Text>
 
-              <FlatList 
-                data={verticalItems.data}
-                horizontal
-                renderItem={({ item: horizontalItems }) => (
-                  <MediaListItem media={horizontalItems}/>
-                )}
-              />
-            </View>
-          )}
-        />
-      </SafeAreaView>
-    </Link>
+            <FlatList
+              data={verticalItems.data}
+              horizontal
+              renderItem={({ item: horizontalItems }) => (
+                <MediaListItem media={horizontalItems} />
+              )}
+            />
+          </View>
+        )}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -49,11 +51,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
+  nameAndIcon: {
+    flexDirection: 'row',
+    // backgroundColor: 'red',
+    alignItems: 'center'
+  },
   nameText: {
     color: 'white',
     fontSize: 25,
     fontWeight: '600',
-    marginBottom: 10
+    marginBottom: 10,
   },
   categoryText: {
     color: 'white',

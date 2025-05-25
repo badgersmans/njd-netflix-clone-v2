@@ -1,4 +1,4 @@
-import { MediaList, MediaListData } from '@/types/types'
+import { MediaListData } from '@/types/types'
 import { View, Text, StyleSheet, Image } from 'react-native'
 
 type MediaListItemProps = {
