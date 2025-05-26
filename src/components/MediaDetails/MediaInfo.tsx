@@ -4,7 +4,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 type MediaInfoProps = {
   media: Media,
-  onPlayPressed: () => void
+  onPlayPressed: (video?: string, episodeId?: string) => Promise<void>,
 }
 
 export default function MediaInfo({media, onPlayPressed}: MediaInfoProps) {
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   metadataContainer: {
     flexDirection: 'row',
-    gap: 8
+    gap: 8,
+    marginTop: 5
   },
   description: {
     color: 'white'
